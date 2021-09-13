@@ -21,6 +21,7 @@ export interface Result {
   vote_average?: number;
   vote_count?: number;
   visible?: boolean;
+  favorite?: boolean;
 }
 
 export enum OriginalLanguage {

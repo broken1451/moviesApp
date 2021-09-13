@@ -13,6 +13,9 @@ import { switchMap } from 'rxjs/operators';
 })
 export class DetailsComponent implements OnInit {
 
+  public movie!: Result;
+  public show = false;
+
   constructor(private activateRoute: ActivatedRoute, private location: Location, private movieService: MoviesService) { }
 
   ngOnInit(): void {
@@ -20,7 +23,9 @@ export class DetailsComponent implements OnInit {
       switchMap(({id}) => {
         return this.getMovieId(id);
       })
-    ).subscribe((res) => {
+    ).subscribe((res: any) => {
+      res.visible = false;
+      this.movie = res;
       console.log({res});
     });
   }

@@ -10,6 +10,10 @@ import { HomeComponent } from './home/home.component';
 import { ContentComponent } from './content/content.component';
 import { ImgPipe } from './pipes/img.pipe';
 import { DetailsComponent } from './details/details.component';
+import { SearchComponent } from './search/search.component';
+import { PopularsComponent } from './populars/populars.component';
+import { NowPlayinngComponent } from './now-playinng/now-playinng.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 
 @NgModule({
@@ -19,7 +23,11 @@ import { DetailsComponent } from './details/details.component';
     HomeComponent,
     ContentComponent,
     ImgPipe,
-    DetailsComponent
+    DetailsComponent,
+    SearchComponent,
+    PopularsComponent,
+    NowPlayinngComponent,
+    FavoritesComponent
   ],
   imports: [
     CommonModule,

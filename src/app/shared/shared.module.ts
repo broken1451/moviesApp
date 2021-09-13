@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { BreadcumbsComponent } from './breadcumbs/breadcumbs.component';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,12 @@ import { NavbarComponent } from './navbar/navbar.component';
     BreadcumbsComponent,
     NavbarComponent,
   ],
-  imports: [CommonModule, RouterModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   exports: [
     NoPageFoundComponent,
     SidebarComponent,

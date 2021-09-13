@@ -9,11 +9,11 @@ export class ImgPipe implements PipeTransform {
 
   transform(img: Result, poster?: any): unknown {
     const url = 'https://image.tmdb.org/t/p/w300';
-    if (img.backdrop_path) {
+    if (img?.backdrop_path) {
       return url + img.backdrop_path;
     } else {
-      if (img.poster_path) {
-        return url + img.poster_path;
+      if (img?.poster_path) {
+        return url + img?.poster_path;
       } else {
         return 'assets/img/notfound.png';
       }
