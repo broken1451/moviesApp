@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Result } from '../models/movies.playing';
 import { MoviesService } from '../services/movies.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-now-playinng',
@@ -8,47 +9,67 @@ import { MoviesService } from '../services/movies.service';
   styleUrls: ['./now-playinng.component.scss'],
 })
 export class NowPlayinngComponent implements OnInit {
-  public moviesPopulares: Result[] = [];
+  public moviesPopulares: any[] = [];
   public peliPlaying: any[] = [];
   public moviePlaying: any[] = [];
   public conteo = 9;
   public show = false;
   public page = 1;
   public peli: any;
+  public favMovie!: boolean | any;
 
-  constructor(private movieService: MoviesService) {}
+  constructor(private movieService: MoviesService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
-    this.peli = JSON.parse(localStorage.getItem('favorites')!);
-    this.getMoviesPlaying();
+    JSON.parse(localStorage.getItem('favorites')!);
+    this.getMoviesPlaying(this.favMovie);
   }
 
-  async getMoviesPlaying(page = '1'): Promise<void> {
+  async getMoviesPlaying(page = '1', fav?: boolean): Promise<any> {
     try {
-      console.log(this.movieService.moviesLocalStorage);
+      // console.log({fav:this.favMovie})
       const resp = await this.movieService.nowPlaying(page)?.toPromise();
       resp?.results?.map((result: Result) => (result.visible = false));
       resp?.results?.map((result: Result) => (result.favorite = false));
+      if (this.favMovie == false) {
+        let moviesLocal: any[] = JSON.parse(localStorage.getItem('favorites')!)
+        resp?.results?.map((result: Result) => {
+          moviesLocal.forEach(peli => {
+            if (result.title == peli.title) {
+              console.log({result, peli,resp});
+              result.favorite = peli.favorite;
+              return  result;
+            }
+          });
+        });
+      } else if(this.favMovie == undefined){
+        let moviesLocal: any[] = JSON.parse(localStorage.getItem('favorites')!)
+        resp?.results?.map((result: Result) => {
+          moviesLocal?.forEach(peli => {
+            if (result.title == peli.title) {
+              console.log({result, peli,resp});
+              result.favorite = peli.favorite;
+              return  result;
+            }
+          });
+        });
+
+      }
       this.moviesPopulares = resp?.results?.slice(0, this.conteo);
-      this.peliPlaying = this.moviesPopulares;
-      // this.peliPlaying = JSON.parse(localStorage.getItem('favorites')!);
-      // console.log({pelis:  this.peliPlaying})
-      //   this.peliPlaying = JSON.parse(localStorage.getItem('favorites')!);
-      // } else {
-      //   this.peliPlaying = this.moviesPopulares;
-      // }
+      this.peliPlaying.push(...this.moviesPopulares);
+      return this.peliPlaying;
     } catch (error) {
       console.log(error);
     }
   }
 
-  previous(numb: number): void {
+   previous(numb: number): any {
     this.page = this.page + numb;
     if (this.page === 0) {
       this.page = 1;
       return;
     }
-    this.getMoviesPlaying(String(this.page));
+    this.getMoviesPlaying(String(this.page), this.favMovie );
   }
 
   next(num: number): void {
@@ -57,24 +78,12 @@ export class NowPlayinngComponent implements OnInit {
       this.page = 68;
       return;
     }
-    console.log({ page: this.page, num });
-    this.getMoviesPlaying(String(this.page));
-
-    // if ( localStorage.getItem('favorites')) {
-    //   this.peliPlaying = JSON.parse(localStorage.getItem('favorites')!);
-    //   return;
-    // }
-    //   console.log('hereeee if');
-    //   console.log(JSON.parse(localStorage.getItem('favorites')!));
-    //   // this.peliPlaying = JSON.parse(localStorage.getItem('favorites')!);
-    // } else{
-    //   console.log('hereeee');
-    //   return;
-    // }
+    this.getMoviesPlaying(String(this.page), this.favMovie );
   }
 
-  addFavorite(peli: Result): void {
+  addFavorite(peli: Result, fav?: boolean): void {
     peli.favorite = !peli.favorite;
+    this.favMovie = fav;
     if (!peli.favorite) {
       const peliDeleted: Result[] = JSON.parse(
         localStorage.getItem('favorites') || ''
@@ -87,22 +96,24 @@ export class NowPlayinngComponent implements OnInit {
       localStorage.setItem('favorites', JSON.stringify(peliDeleted));
       let movieLSfav = JSON.parse(localStorage.getItem('favorites') || '');
       const filterMovFav = movieLSfav.filter((pe: any) => pe.favorite === true);
-      console.log({ filterMovFav });
       localStorage.setItem('favorites', JSON.stringify(filterMovFav));
+      this.toastr.error('Removida de Favoritos', 'Pelicula', {
+        positionClass: 'toast-top-right'
+      });
     } else {
       let arrMovies = this.peliPlaying.filter(
-        (pelicula) => pelicula.favorite === true
+        (pelicula) => {
+          if (pelicula.favorite === true) {
+            return pelicula;
+          }
+        }
       );
-      this.movieService._MOVIESlOCALSTORAGE = arrMovies;
-      this.saveFavoritos(arrMovies);
-      // console.log( this.movieService.moviesLocalStorage)
       localStorage.setItem('favorites', JSON.stringify(arrMovies));
-      // sessionStorage.setItem('favorites', JSON.stringify(arrMovies));
+      this.toastr.success('Agregada a Favoritos', 'Pelicula',{
+        positionClass: 'toast-top-right'
+      });
+      return;
     }
   }
 
-  saveFavoritos(data: any) {
-    let moviesFav = data;
-    console.log({ moviesFav });
-  }
 }

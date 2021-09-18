@@ -12,7 +12,8 @@ import { MoviePlayingResponse } from '../models/movies.playing';
 })
 export class MoviesService {
 
-  public _MOVIESlOCALSTORAGE!: any;
+  public _MOVIESlOCALSTORAGE!: any[];
+  public movieStoraged!: any[];
 
 
   constructor(private httpClient: HttpClient) {
@@ -20,7 +21,7 @@ export class MoviesService {
   }
 
   public get moviesLocalStorage(): any{
-    return this._MOVIESlOCALSTORAGE;
+    return {...this._MOVIESlOCALSTORAGE};
   }
 
   set MOVIESlOCAL(value: any) {

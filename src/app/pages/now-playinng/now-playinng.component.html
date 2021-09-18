@@ -6,21 +6,21 @@
             <button type="button" class="btn btn-success mb-4" [disabled]='page == 1' (click)="previous(-1)">Previous</button>
             <button type="button" class="btn btn-success mb-4" [disabled]='page == 68' (click)="next(+1)">Next</button>
             <div class="row">
-                <div class="col-lg-4" *ngFor="let peli of peliPlaying" style="cursor: pointer;">
+                <div class="col-lg-4" *ngFor="let peli of moviesPopulares" style="cursor: pointer;">
                   <div class="card">
                     <!-- Card image -->   
                     <img class="card-img-top" [src]='peli | img'  alt="Image placeholder">
                     <!-- Card body -->
                     <div class="card-body">
-                      <h3 class="card-title mb-3">{{peli.title}}</h3>
-                      <div class="card-text mb-4 containerMore" [class.show]="peli.visible" style="text-align: justify;">
-                       {{ peli.overview}}
+                      <h3 class="card-title mb-3">{{peli?.title}}</h3>
+                      <div class="card-text mb-4 containerMore" [class.show]="peli?.visible" style="text-align: justify;">
+                       {{ peli?.overview}}
                     </div>
-                    <button type="button" class="btn btn-success mb-4" (click)="addFavorite(peli)"> 
-                        <i class="ni ni-favourite-28" [class.heart]="peli.favorite"></i>
+                    <button type="button" class="btn btn-success mb-4" (click)="addFavorite(peli, peli.favorite)"> 
+                        <i class="ni ni-favourite-28" [class.heart]="peli?.favorite"></i>
                         Add to favorites
                     </button>
-                      <button type="button" class="btn btn-success mb-4"  (click)="peli.visible = !peli.visible"> {{ peli.visible ? 'Show less': 'Show more' }}</button>
+                      <button type="button" class="btn btn-success mb-4"  (click)="peli.visible = !peli.visible"> {{ peli?.visible ? 'Show less': 'Show more' }}</button>
                     </div>
                     <!-- <button type="button" class="btn btn-primary mb-4" (click)="goToDetails(peli)">Go to details</button> -->
                   </div>

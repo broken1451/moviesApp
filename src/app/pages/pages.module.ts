@@ -14,6 +14,7 @@ import { SearchComponent } from './search/search.component';
 import { PopularsComponent } from './populars/populars.component';
 import { NowPlayinngComponent } from './now-playinng/now-playinng.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { FilterPipe } from './pipes/filtro.pipe';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { FavoritesComponent } from './favorites/favorites.component';
     HomeComponent,
     ContentComponent,
     ImgPipe,
+    FilterPipe,
     DetailsComponent,
     SearchComponent,
     PopularsComponent,
