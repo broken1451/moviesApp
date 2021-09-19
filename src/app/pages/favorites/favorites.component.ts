@@ -24,6 +24,9 @@ export class FavoritesComponent implements OnInit {
       },
       {
         name: 'favorites',
+      },
+      {
+        name: 'favoritesRated',
       }
     ];
   }
@@ -47,15 +50,14 @@ export class FavoritesComponent implements OnInit {
   onChange(event: any): any {
     this.valFav = event.target?.value || 'favoritesHome';
     this.loading = true;
-    // tslint:disable-next-line: no-non-null-assertion
     setTimeout(() => {
+      // tslint:disable-next-line: no-non-null-assertion
       this.movFav = JSON.parse(localStorage.getItem(this.valFav)!) || '';
       this.loading = false;
     }, 2000);
   }
 
   goToDetails(peli: Result): void {
-    console.log({ peli });
     this.router.navigate(['/movies/details', peli.id]);
   }
 

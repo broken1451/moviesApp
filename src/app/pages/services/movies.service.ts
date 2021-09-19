@@ -79,8 +79,7 @@ export class MoviesService {
     try {
       const params = new HttpParams()
       .set('api_key', String(environment.api_key))
-      .set('page', String(page))
-      .set('language', String('en-US'));
+      .set('page', String(page));
       // tslint:disable-next-line: max-line-length
       // `${environment.baseUrl}/movie/popular?api_key=${environment.api_key}&language=en-US&page=${page}`)
       return this.httpClient.get<MovieResponse>(`${environment.baseUrl}/movie/popular`, {params}).pipe(
@@ -96,11 +95,25 @@ export class MoviesService {
     try {
       const params = new HttpParams()
       .set('api_key', String(environment.api_key))
-      .set('page', String(page))
-      .set('language', String('en-US'));
+      .set('page', String(page));
       // tslint:disable-next-line: max-line-length
       // `${environment.baseUrl}/movie/now_playing?api_key=${environment.api_key}&language=en-US&page=${page}`)
       return this.httpClient.get<MoviePlayingResponse>(`${environment.baseUrl}/movie/now_playing`, {params}).pipe(
+        map(moviesPlaying => {
+          return moviesPlaying;
+        })
+      );
+     } catch (error) {
+         console.log(error);
+     }
+  }
+
+  public topRated(page: string | number): any {
+    try {
+      const params = new HttpParams()
+      .set('api_key', String(environment.api_key))
+      .set('page', String(page));
+      return this.httpClient.get<MovieResponse>(`${environment.baseUrl}/movie/top_rated`, {params}).pipe(
         map(moviesPlaying => {
           return moviesPlaying;
         })
