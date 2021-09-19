@@ -7,6 +7,7 @@ import { BreadcumbsComponent } from './breadcumbs/breadcumbs.component';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     BreadcumbsComponent,
     NavbarComponent,
+    LoadingComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SidebarComponent,
     HeaderComponent,
     BreadcumbsComponent,
+    LoadingComponent
   ],
 })
 export class SharedModule {}

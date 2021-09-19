@@ -15,6 +15,7 @@ import { PopularsComponent } from './populars/populars.component';
 import { NowPlayinngComponent } from './now-playinng/now-playinng.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { FilterPipe } from './pipes/filtro.pipe';
+import { TopRatedComponent } from './top-rated/top-rated.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { FilterPipe } from './pipes/filtro.pipe';
     SearchComponent,
     PopularsComponent,
     NowPlayinngComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    TopRatedComponent
   ],
   imports: [
     CommonModule,

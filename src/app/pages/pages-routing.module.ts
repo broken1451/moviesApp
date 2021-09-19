@@ -7,6 +7,7 @@ import { SearchComponent } from './search/search.component';
 import { PopularsComponent } from './populars/populars.component';
 import { NowPlayinngComponent } from './now-playinng/now-playinng.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { TopRatedComponent } from './top-rated/top-rated.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,11 @@ const routes: Routes = [
         path: 'favorites',
         component: FavoritesComponent,
         data: {titulo: 'Favorites', descrip: 'Esto es la pagina de Favoritos'}
+      },
+      {
+        path: 'top-rated',
+        component: TopRatedComponent,
+        data: {titulo: 'Top-Rated', descrip: 'Esto es la pagina de Valorados'}
       },
       { path: '**', redirectTo: 'dashboard' },
       // { path: '**', component: NoPageFoundComponent },

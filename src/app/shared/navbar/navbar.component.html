@@ -28,16 +28,16 @@
               <span class="nav-link-text">Now Playing</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="profile.html">
+          <li class="nav-item" [routerLink]="['/movies/favorites']" routerLinkActive="active" style="cursor: pointer;">
+            <a class="nav-link">
               <i class="ni ni-single-02 text-yellow"></i>
-              <span class="nav-link-text">Profile</span>
+              <span class="nav-link-text">Favorites</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="tables.html">
+          <li class="nav-item" [routerLink]="['/movies/top-rated']" routerLinkActive="active" style="cursor: pointer;">
+            <a class="nav-link">
               <i class="ni ni-bullet-list-67 text-default"></i>
-              <span class="nav-link-text">Tables</span>
+              <span class="nav-link-text">Top-rated</span>
             </a>
           </li>
           <li class="nav-item">

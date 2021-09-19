@@ -14,20 +14,26 @@ export class PopularsComponent implements OnInit {
   public conteo = 9;
   public show = false;
   public page = 1;
+  public loading!: boolean;
 
   constructor(private movieService: MoviesService) { }
 
   ngOnInit(): void {
+    this.loading = true;
     this.getPopulares();
   }
 
 
   async getPopulares( page = '1'): Promise<void> {
     try {
-      const resp = await this.movieService.getPopulars(page)?.toPromise();
-      resp?.results?.map((result: Result) => result.visible = false)
-      this.moviesPopulares = resp?.results?.slice(0, this.conteo);
-      this.peliPopulares = this.moviesPopulares;
+      this.loading = true;
+      setTimeout(async () => {
+        const resp = await this.movieService.getPopulars(page)?.toPromise();
+        resp?.results?.map((result: Result) => result.visible = false)
+        this.moviesPopulares = resp?.results?.slice(0, this.conteo);
+        this.peliPopulares = this.moviesPopulares;
+        this.loading = false;
+      }, 2000);
     } catch (error) {
       console.log(error);
     }
