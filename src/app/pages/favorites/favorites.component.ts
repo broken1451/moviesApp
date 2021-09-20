@@ -20,13 +20,16 @@ export class FavoritesComponent implements OnInit {
   constructor(private router: Router) {
     this.typeFav = [
       {
-        name: 'favoritesHome',
+        name: 'Favorites in home',
+        value: 'favoritesHome'
       },
       {
-        name: 'favorites',
+        name: 'Favorites in now Playing',
+        value: 'favorites'
       },
       {
-        name: 'favoritesRated',
+        name: 'Favorites in top Rated',
+        value: 'favoritesRated'
       }
     ];
   }

@@ -17,7 +17,7 @@
                     <div class="form-group">
                       <select class="form-control" formControlName="type" name='type' (change)="onChange($event)" id="exampleFormControlSelect1">
                         <option [ngValue]="undefined" hidden>Seleccione tipo de favoritos</option>
-                        <option *ngFor="let typeFav of typeFav" [value]='typeFav.name'>{{typeFav.name | titlecase}}</option>
+                        <option *ngFor="let typeFav of typeFav" [value]='typeFav.value'>{{typeFav.name | titlecase}}</option>
                       </select>
                     </div>
                   </form>
