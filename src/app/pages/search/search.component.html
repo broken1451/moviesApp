@@ -4,11 +4,12 @@
       <div class="header-body">
         <app-breadcumbs></app-breadcumbs>
         <div class="container-fluid mt-4">
-<button type="button" class="btn btn-success mb-4" [disabled]='page == 1' (click)="previous(-1)">Previous</button>
-<button type="button" class="btn btn-success mb-4" [disabled]='page == 26' (click)="next(+1)">Next</button>
-            <div class="row">
-                <div class="col-lg-4" *ngFor="let peli of peliSerched" style="cursor: pointer;">
-                  <div class="card">
+        <button type="button" class="btn btn-success mb-4" [disabled]='page == 1' (click)="previous(-1)">Previous</button>
+        <button type="button" class="btn btn-success mb-4" [disabled]='page == 26' (click)="next(+1)">Next</button>
+        <app-loading *ngIf="loading"></app-loading>  
+          <div class="row" *ngIf="peliSerched.length > 0;else noMovie">
+                <div  class="col-lg-4" *ngFor="let peli of peliSerched" style="cursor: pointer;">
+                  <div class="card"  *ngIf="!loading" >
                     <!-- Card image -->   
                     <img class="card-img-top" [src]="peli | img"   alt="Image placeholder">
                     <!-- Card body -->
@@ -23,6 +24,17 @@
                   </div>
                 </div>
                 </div>
+                <ng-template #noMovie>
+                  <div class="row">
+                      <div class="col-lg-12" style="cursor: pointer;">
+                          <div class="card bg-gradient-default">
+                              <h3 class="card-title text-white text-center mt-3">
+                                 No se ha encontrado peliculas con el termino {{textoSearched}}
+                              </h3>
+                          </div>
+                      </div>
+                  </div>
+              </ng-template>
         </div>
       </div>
     </div>
