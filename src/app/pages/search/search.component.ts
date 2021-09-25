@@ -38,7 +38,6 @@ export class SearchComponent implements OnInit {
      resp?.results?.map((result: any) => result.visible = false);
      this.peliSerched = resp?.results?.slice(0, this.conteo);
      this.loading = false;
-     console.log({peliSerched: this.peliSerched});
    }, 2000);
   }
 

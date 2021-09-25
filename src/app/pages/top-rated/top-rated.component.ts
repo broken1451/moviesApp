@@ -40,7 +40,6 @@ export class TopRatedComponent implements OnInit {
         resp?.results?.map((result: Result) => {
           moviesLocal.forEach(peli => {
             if (result.title == peli.title) {
-              console.log({result, peli,resp});
               result.favorite = peli.favorite;
               return  result;
             }
@@ -52,7 +51,6 @@ export class TopRatedComponent implements OnInit {
         resp?.results?.map((result: Result) => {
           moviesLocal?.forEach(peli => {
             if (result.title == peli.title) {
-              console.log({result, peli,resp});
               result.favorite = peli.favorite;
               return  result;
             }
